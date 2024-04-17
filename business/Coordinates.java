@@ -23,46 +23,34 @@ public class Coordinates {
         return height;
     }
 
-    // TODO: Redo following the rules
-    public void increaseHeight(int n) {
-        if (this.height + n > Bounds.MAX_HEIGHT) {
-            throw new Exception(String.format("cannot increase height above %d", Bounds.MAX_HEIGHT));
+
+    public void setLongitude(int longitude) {
+        if (longitude < 0) {
+            this.longitude = 0;
+        } else if (longitude > Bounds.MAX_LONGITUDE) {
+            this.longitude = Bounds.MAX_LONGITUDE;
+        } else {
+            this.longitude = longitude;
         }
-        this.height += n;
     }
 
-    public void increaseLatitude(int n) {
-        if (this.latitude + n > Bounds.MAX_LATITUDE) {
-            throw new Exception(String.format("cannot increase latitude above %d", Bounds.MAX_LATITUDE));
+    public void setLatitude(int latitude) {
+        if (latitude < 0) {
+            this.latitude = 0;
+        } else if (latitude > Bounds.MAX_LATITUDE) {
+            this.latitude = Bounds.MAX_LATITUDE;
+        } else {
+            this.latitude = latitude;
         }
-        this.latitude += n;
     }
 
-    public void increaseLongitude(int n) {
-        if (this.longitude + n > Bounds.MAX_LONGITUDE) {
-            throw new Exception(String.format("cannot increase longitude above %d", Bounds.MAX_LONGITUDE));
+    public void setHeight(int height) {
+        if (height < 0) {
+            this.height = 0;
+        } else if (height > Bounds.MAX_HEIGHT) {
+            this.height = Bounds.MAX_HEIGHT;
+        } else {
+            this.height = height;
         }
-        this.longitude += n;
-    }
-
-    public void decreaseHeight(int n) {
-        if (this.height - n < 0) {
-            throw new Exception("cannot decrease height below 0");
-        }
-        this.height -= n;
-    }
-
-    public void decreaseLatitude(int n) {
-        if (this.latitude - n < 0) {
-            throw new Exception("cannot decrease latitude below 0");
-        }
-        this.latitude -= n;
-    }
-
-    public void decreaseLongitude(int n) {
-        if (this.longitude - n < 0) {
-            throw new Exception("cannot decrease longitude below 0");
-        }
-        this.longitude -= n;
     }
 }

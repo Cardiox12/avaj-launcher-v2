@@ -1,6 +1,7 @@
 package business.aircraft;
 
 import business.Coordinates;
+import business.weather.WeatherUpdater;
 
 public class Baloon extends Aircraft {
     public Baloon(long id, String name, Coordinates coordinates) {
@@ -9,21 +10,19 @@ public class Baloon extends Aircraft {
 
     public void updateConditions() {
         String weather = this.weatherTower.getWeather(this.coordinates);
+        WeatherUpdater weatherUpdater = new WeatherUpdater(coordinates);
 
-        switch (weather) {
-            case "SUN":
-                this.coordinates.increaseLongitude(2);
-                this.coordinates.increaseHeight(4);
-                break;
-            case "RAIN":
-                this.coordinates.decreaseHeight(5);
-                break;
-            case "FOG":
-                this.coordinates.decreaseHeight(3);
-                break;
-            case "SNOW":
-                this.coordinates.decreaseHeight(15);
-                break;
-        }
+
+        weatherUpdater.build("SUN")
+            .increaseLongitude(2)
+            .increaseHeight(4);
+        weatherUpdater.build("RAIN")
+            .decreaseHeight(5);
+        weatherUpdater.build("FOG")
+            .decreaseHeight(3);
+        weatherUpdater.build("SNOW")
+            .decreaseHeight(15);
+        
+        weatherUpdater.update(weather);
     }
 }

@@ -33,6 +33,6 @@ public class AircraftFactory {
                 return new JetPlane(uuid, name, coordinates);
         }
         // TODO: Throw a custom exception
-        throw new Exception("Unknown entity");
+        throw new Exception(String.format("AircraftFactory: unknown aircraft %s", type));
     }
 }
