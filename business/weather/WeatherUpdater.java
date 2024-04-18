@@ -1,6 +1,7 @@
 package business.weather;
 
 import business.Coordinates;
+import business.flyable.Flyable;
 
 public class WeatherUpdater {
     private WeatherUpdaterBuilder sun;
@@ -8,14 +9,14 @@ public class WeatherUpdater {
     private WeatherUpdaterBuilder fog;
     private WeatherUpdaterBuilder snow;
 
-    public WeatherUpdater(Coordinates coordinates) {
-        this.sun = new WeatherUpdaterBuilder(coordinates);
-        this.rain = new WeatherUpdaterBuilder(coordinates);
-        this.fog = new WeatherUpdaterBuilder(coordinates);
-        this.snow = new WeatherUpdaterBuilder(coordinates);
+    public WeatherUpdater(Flyable flyable, Coordinates coordinates) {
+        this.sun = new WeatherUpdaterBuilder(flyable, coordinates);
+        this.rain = new WeatherUpdaterBuilder(flyable, coordinates);
+        this.fog = new WeatherUpdaterBuilder(flyable, coordinates);
+        this.snow = new WeatherUpdaterBuilder(flyable, coordinates);
     }
 
-    public WeatherUpdaterBuilder build(String weather) {
+    public WeatherUpdaterBuilder build(String weather) throws Exception {
         switch (weather) {
             case "SUN": return this.sun;
             case "RAIN": return this.rain;
@@ -25,7 +26,7 @@ public class WeatherUpdater {
         throw new Exception(String.format("WeatherUpdater: unknown weather %s", weather));
     }
 
-    public void update(String weather) {
+    public void update(String weather) throws Exception {
         switch (weather) {
             case "SUN":
                 this.sun.update();
@@ -39,7 +40,8 @@ public class WeatherUpdater {
             case "SNOW":
                 this.snow.update();
                 break;
+            default:
+                throw new Exception(String.format("WeatherUpdater: unknown weather %s", weather));
         }
-        throw new Exception(String.format("WeatherUpdater: unknown weather %s", weather));
     }
 }

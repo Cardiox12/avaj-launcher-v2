@@ -13,13 +13,7 @@ public class WeatherProvider {
     private WeatherProvider() {
         map = new String[Bounds.MAX_HEIGHT][Bounds.MAX_LONGITUDE][Bounds.MAX_LATITUDE];
 
-        for (int h = 0 ; h < Bounds.MAX_HEIGHT ; h++) {
-            for (int y = 0 ; y < Bounds.MAX_LONGITUDE ; y++) {
-                for (int x = 0 ; x < Bounds.MAX_LATITUDE ; x++) {
-                    map[h][y][x] = generateRandomWeather(new Coordinates(y, x, h));
-                }
-            }
-        }
+        this.changeWeatherConditions();
     }
 
     public static WeatherProvider getInstance() {
@@ -36,14 +30,25 @@ public class WeatherProvider {
             [coordinates.getLatitude()];
     }
 
-    private String generateRandomWeather(Coordinates coordinates) {
+    private String generateRandomWeather() {
         Random r = new Random();
 
-        int latRand = r.nextInt(coordinates.getLatitude());
-        int lngRand = r.nextInt(coordinates.getLongitude());
-        int heightRand = r.nextInt(coordinates.getHeight());
+        int latRand = r.nextInt(Bounds.MAX_LATITUDE - 1);
+        int lngRand = r.nextInt(Bounds.MAX_LONGITUDE - 1);
+        int heightRand = r.nextInt(Bounds.MAX_HEIGHT - 1);
+
         int totalRands = latRand + lngRand + heightRand;
 
         return this.weather[totalRands % weather.length];
+    }
+
+    public void changeWeatherConditions() {
+        for (int h = 0 ; h < Bounds.MAX_HEIGHT ; h++) {
+            for (int y = 0 ; y < Bounds.MAX_LONGITUDE ; y++) {
+                for (int x = 0 ; x < Bounds.MAX_LATITUDE ; x++) {
+                    this.map[h][y][x] = generateRandomWeather();
+                }
+            }
+        }
     }
 }

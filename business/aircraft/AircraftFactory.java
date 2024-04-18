@@ -17,12 +17,9 @@ public class AircraftFactory {
         return aircraftFactory;
     }
 
-    Flyable newAircraft(String type, String name, Coordinates coordinates) {
+    public Flyable newAircraft(String type, String name, Coordinates coordinates) throws Exception {
         // Generate a random unique ID with a length 5.
-        String uuidString = UUID.randomUUID()
-            .toString()
-            .substring(0, 5);
-        long uuid = Long.parseLong(uuidString);
+        long uuid = Math.abs(UUID.randomUUID().getLeastSignificantBits()) % 100;
 
         switch (type) {
             case "BALOON":

@@ -14,5 +14,13 @@ public class Aircraft extends Flyable {
         this.coordinates = coordinates;
     }
 
-    public void updateConditions() {}
+    public void updateConditions() throws Exception {}
+
+    public String toString() { 
+        return ""; 
+    }
+
+    public boolean hasLanded() {
+        return this.coordinates.getHeight() == 0;
+    }
 }

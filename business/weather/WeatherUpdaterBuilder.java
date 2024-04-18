@@ -1,18 +1,29 @@
 package business.weather;
 
 import business.Coordinates;
+import business.flyable.Flyable;
+import business.logger.Logger;
 
 public class WeatherUpdaterBuilder {
     private Coordinates coordinates;
     private int increasedHeight;
     private int increasedLatitude;
     private int increasedLongitude;
+    Logger logger;
+    private String message;
 
-    public WeatherUpdaterBuilder(Coordinates coordinates) {
+    public WeatherUpdaterBuilder(Flyable flyable, Coordinates coordinates) {
         this.coordinates = coordinates;
         this.increasedHeight = 0;
         this.increasedLatitude = 0;
         this.increasedLongitude = 0;
+        this.logger = new Logger(flyable.toString());
+        this.message = "";
+    }
+
+    public WeatherUpdaterBuilder setMessage(String message) {
+        this.message = message;
+        return this;
     }
 
     public WeatherUpdaterBuilder increaseHeight(int n) {
@@ -46,6 +57,7 @@ public class WeatherUpdaterBuilder {
     }
 
     public void update() {
+        this.logger.log(this.message);
         this.coordinates.setHeight(this.coordinates.getHeight() + this.increasedHeight);
         this.coordinates.setLatitude(this.coordinates.getLatitude() + increasedLatitude);
         this.coordinates.setLongitude(this.coordinates.getLongitude() + increasedLongitude);
