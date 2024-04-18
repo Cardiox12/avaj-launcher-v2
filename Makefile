@@ -11,4 +11,4 @@ fclean:
 	@find . -name "*.class" -delete
 
 run: all
-	@java ${MAIN}
+	@java ${MAIN} ./scenarios/scenario2.txt
