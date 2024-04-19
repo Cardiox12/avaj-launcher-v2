@@ -2,15 +2,15 @@ package business.tower;
 
 import business.Coordinates;
 import business.flyable.Flyable;
-import business.logger.Logger;
+import business.logger.AvajLogger;
 import business.weather.WeatherProvider;
 
 public class WeatherTower extends Tower {
-    private Logger logger;
+    private AvajLogger logger;
 
     public WeatherTower() {
         super();
-        this.logger = new Logger("Tower says");
+        this.logger = new AvajLogger();
     }
 
     public String getWeather(Coordinates coordinates) {
@@ -25,12 +25,12 @@ public class WeatherTower extends Tower {
     public void register(Flyable flyable) {
         super.register(flyable);
         flyable.registerTower(this);
-        logger.log(String.format("%s registered to weather tower", flyable));
+        this.logger.log(String.format("Tower says: %s registered to weather tower", flyable));
     }
 
     public void unregister(Flyable flyable) {
         super.unregister(flyable);
-        logger.log(String.format("%s unregistered from weather tower", flyable));
+        this.logger.log(String.format("Tower says: %s unregistered from weather tower", flyable));
     }
 
     private void landFlyables() {
