@@ -18,7 +18,6 @@ public class WeatherTower extends Tower {
     }
 
     public void changeWeather() throws Exception {
-        WeatherProvider.getInstance().changeWeatherConditions();
         super.conditionsChanged();
         this.landFlyables();
     }
