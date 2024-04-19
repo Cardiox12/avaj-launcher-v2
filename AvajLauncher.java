@@ -1,5 +1,6 @@
 import java.util.logging.Logger;
 
+import business.logger.AvajLogger;
 import business.scenario.ScenarioInterpreter;
 
 public class AvajLauncher {
@@ -10,8 +11,13 @@ public class AvajLauncher {
       System.exit(1);
     }
     ScenarioInterpreter interpreter = new ScenarioInterpreter(args[0]);
-
-    interpreter.read();
-    interpreter.execute();
+    
+    try {
+      interpreter.read();
+      interpreter.execute();
+    } catch (Exception e) {
+      System.err.println(e.toString());
+    }
+    AvajLogger.getInstance().close();
   }
 }

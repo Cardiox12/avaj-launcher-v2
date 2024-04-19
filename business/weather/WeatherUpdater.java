@@ -9,7 +9,7 @@ public class WeatherUpdater {
     private WeatherUpdaterBuilder fog;
     private WeatherUpdaterBuilder snow;
 
-    public WeatherUpdater(Flyable flyable, Coordinates coordinates) {
+    public WeatherUpdater(Flyable flyable, Coordinates coordinates) throws Exception {
         this.sun = new WeatherUpdaterBuilder(flyable, coordinates);
         this.rain = new WeatherUpdaterBuilder(flyable, coordinates);
         this.fog = new WeatherUpdaterBuilder(flyable, coordinates);

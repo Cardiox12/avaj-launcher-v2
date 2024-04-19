@@ -15,11 +15,11 @@ public class Tower {
         this.landings = new LinkedList<>();
     }
 
-    public void register(Flyable flyable) {
+    public void register(Flyable flyable) throws Exception {
         this.observers.add(flyable);
     }
 
-    public void unregister(Flyable flyable) {
+    public void unregister(Flyable flyable) throws Exception {
         this.observers.remove(flyable);
     }
 

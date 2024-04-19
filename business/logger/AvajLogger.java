@@ -1,25 +1,27 @@
 package business.logger;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class AvajLogger {
-    private static final Logger logger = Logger.getLogger("tower");
+    private static BufferedWriter fileWriter;
+    private static AvajLogger instance;
 
-    static {
-        
-        Handler handler = new ConsoleHandler();
-        handler.setFormatter(new NoLevelFormatter());
-        logger.addHandler(handler);
-        logger.setLevel(Level.ALL);
+    private AvajLogger() {}
+
+    public static AvajLogger getInstance() throws Exception {
+        if (instance == null) {
+            instance = new AvajLogger();
+            fileWriter = new BufferedWriter(new FileWriter("simulation.txt"));
+        }
+        return instance;
     }
 
-    public AvajLogger() {}
+    public void log(String message) throws Exception {
+        fileWriter.write(String.format("%s\n", message));
+    }
 
-    public void log(String message) {
-        logger.info(message);
-        System.out.println("===============");
+    public void close() throws Exception {
+        fileWriter.close();
     }
 }

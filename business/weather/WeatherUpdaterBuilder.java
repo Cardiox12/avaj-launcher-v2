@@ -13,14 +13,14 @@ public class WeatherUpdaterBuilder {
     private String message;
     private Flyable flyable;
 
-    public WeatherUpdaterBuilder(Flyable flyable, Coordinates coordinates) {
+    public WeatherUpdaterBuilder(Flyable flyable, Coordinates coordinates) throws Exception {
         this.coordinates = coordinates;
         this.increasedHeight = 0;
         this.increasedLatitude = 0;
         this.increasedLongitude = 0;
         this.message = "";
         this.flyable = flyable;
-        this.logger = new AvajLogger();
+        this.logger = AvajLogger.getInstance();
     }
 
     public WeatherUpdaterBuilder setMessage(String message) {
@@ -58,9 +58,9 @@ public class WeatherUpdaterBuilder {
         return this;
     }
 
-    public void update() {
+    public void update() throws Exception {
         String message = String.format("%s %s", this.flyable, this.message);
-        AvajLogger.log(message);
+        this.logger.log(message);
         this.coordinates.setHeight(this.coordinates.getHeight() + this.increasedHeight);
         this.coordinates.setLatitude(this.coordinates.getLatitude() + this.increasedLatitude);
         this.coordinates.setLongitude(this.coordinates.getLongitude() + this.increasedLongitude);
