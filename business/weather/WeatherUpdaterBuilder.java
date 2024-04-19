@@ -60,9 +60,9 @@ public class WeatherUpdaterBuilder {
 
     public void update() {
         String message = String.format("%s %s", this.flyable, this.message);
-        this.logger.log(message);
+        AvajLogger.log(message);
         this.coordinates.setHeight(this.coordinates.getHeight() + this.increasedHeight);
-        this.coordinates.setLatitude(this.coordinates.getLatitude() + increasedLatitude);
-        this.coordinates.setLongitude(this.coordinates.getLongitude() + increasedLongitude);
+        this.coordinates.setLatitude(this.coordinates.getLatitude() + this.increasedLatitude);
+        this.coordinates.setLongitude(this.coordinates.getLongitude() + this.increasedLongitude);
     }
 }
