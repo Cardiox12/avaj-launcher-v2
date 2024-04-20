@@ -15,7 +15,7 @@ public class AvajLauncher {
       interpreter.read();
       interpreter.execute();
     } catch (Exception e) {
-      System.err.println(e.toString());
+      e.printStackTrace();
     }
     AvajLogger.getInstance().close();
   }
